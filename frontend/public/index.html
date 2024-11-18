@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Number Verification</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js"></script>
+</head>
+<body>
+<div class="container mx-auto my-10">
+    <h1 class="text-3xl font-bold mb-6 text-center">Enter International Phone number</h1>
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md mx-auto">
+        <form id="phone-form">
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="phone">
+                    Phone Number
+                </label>
+                <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="phone" type="text" placeholder="+" aria-describedby="phone-description">
+                <small id="phone-description" class="text-gray-500">
+                    Format: + 49 30 123456
+                </small>
+            </div>
+            <div class="flex items-center justify-between">
+                <button
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
+                        type="button" onclick="verifyPhone()">
+                    Verify
+                </button>
+            </div>
+        </form>
+        <div id="result" class="mt-4 text-sm" aria-live="polite"></div>
+    </div>
+</div>
+
+<script>
+    $('#phone').on('input', function () {
+        if (!this.value.startsWith('+')) {
+            this.value = '+' + this.value.replace(/^(\+)+/, '');
+        }
+    });
+
+    function verifyPhone() {
+        let phoneInput = document.getElementById('phone');
+        let resultDiv = document.getElementById('result');
+
+        fetch('http://localhost:8081/verify-phone', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({phone: phoneInput.value})
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    resultDiv.textContent = `The phone number ${data.phone} belongs to ${data.country_name}.`;
+                    resultDiv.className = 'text-green-500';
+                } else {
+                    resultDiv.textContent = data.error;
+                    resultDiv.className = 'text-red-500';
+                }
+            })
+            .catch(error => {
+                resultDiv.textContent = 'Error: ' + error.message;
+                resultDiv.className = 'text-red-500';
+            });
+    }
+</script>
+</body>
+</html>
