@@ -44,6 +44,7 @@ class PhoneVerificationServiceTest extends TestCase
             ['+373(22)582190', 'MD', 'Moldova'],
             ['+373(778)55555', 'MD', 'Moldova'],
             ['+373 775 55555', 'MD', 'Moldova'],
+            ['+373 (775) 44595', 'MD', 'Moldova'],
             //RUSSIA
             ['+79261234567', 'RU', 'Russia'],
             ['+7(4742)858539', 'RU', 'Russia'],
