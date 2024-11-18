@@ -7,6 +7,6 @@ REQUIREMENTS
 
 INSTALLATION
 ------------
-- Need only run command in terminal: make init
+- Need only run [Makefile] command in terminal: make init
 
 After run frontend: http://localhost:8080/
