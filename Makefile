@@ -16,3 +16,5 @@ docker-down-clear:
 	docker compose down -v --remove-orphans
 composer-install:
 	docker compose run --rm backend-php-cli composer install
+test:
+	docker compose run --rm backend-php-cli ./vendor/bin/phpunit
