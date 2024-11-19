@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phone Number Verification</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js"></script>
 </head>
 <body>
 <div class="container mx-auto my-10">
@@ -21,7 +19,7 @@
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="phone" type="text" placeholder="+" aria-describedby="phone-description">
                 <small id="phone-description" class="text-gray-500">
-                    Format: + 49 30 123456
+                    International Format: +49 30 123456
                 </small>
             </div>
             <div class="flex items-center justify-between">
@@ -37,7 +35,7 @@
 </div>
 
 <script>
-    $('#phone').on('input', function () {
+    document.getElementById('phone').addEventListener('input', function () {
         if (!this.value.startsWith('+')) {
             this.value = '+' + this.value.replace(/^(\+)+/, '');
         }

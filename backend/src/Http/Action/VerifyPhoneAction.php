@@ -27,6 +27,10 @@ readonly class VerifyPhoneAction implements RequestHandlerInterface
                 throw new InvalidArgumentException("Phone number is required.");
             }
 
+            if (!is_string($data['phone'])) {
+                throw new InvalidArgumentException("Phone number must be a string.");
+            }
+
             $verificationResponse = $this->phoneVerificationService->verifyPhone($data['phone']);
 
             return new JsonResponse($verificationResponse);

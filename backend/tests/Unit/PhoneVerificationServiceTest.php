@@ -57,6 +57,8 @@ class PhoneVerificationServiceTest extends TestCase
             //GERMANY
             ['+4930123456', 'DE', 'Germany'],
             ['+49 06534675108', 'DE', 'Germany'],
+            //ITALY
+            ['+39 333 3333333', 'IT', 'Italy']
         ];
     }
 
