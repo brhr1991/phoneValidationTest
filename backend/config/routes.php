@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Http\Action\VerifyPhoneAction;
+use App\Http\Action\TonAction;
 use Slim\App;
 
 return static function (App $app): void {
-    $app->post('/verify-phone', VerifyPhoneAction::class);
+    $app->get('/ton', TonAction::class);
 };
